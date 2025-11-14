@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Birthday — Page 1</title>
+  <link rel="stylesheet" href="css/common.css"/>
+
+  <style>
+    /* ❄️ Snowfall slow full-screen fix */
+    #hearts-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      overflow: hidden;
+    }
+
+    .snow {
+      position: absolute;
+      top: -10px;
+      color: #fff;
+      animation: fallSnow linear forwards;
+      opacity: 0.3;
+      filter: drop-shadow(0 0 6px #fff);
+    }
+
+    @keyframes fallSnow {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) scale(1.2) rotate(720deg);
+        opacity: 0.6;
+      }
+    }
+
+    /* Make big image always fit and not cut on phones */
+    .big-image-container {
+      width: 100%;
+      max-height: 60vh;
+      overflow: hidden;
+      border-radius: 16px;
+      margin: 12px 0;
+    }
+
+    .big-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header class="topbar">
+      <div class="brand"></div>
+      <div class="page-indicator"></div>
+    </header>
+
+    <main class="page-box">
+      <div class="hero">
+        <div class="hero-left">
+          <h1 class="hero-title">HAPPY BIRTHDAY CUTU</h1>
+
+          <!-- 👇 Image inserted between title and question -->
+          <div class="big-image-container">
+            <img src="assets/images/vishal_main.jpg" alt="Cutie" class="big-image" />
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="nav-row">
+        <div class="small-note">Made With Love By Vishal Roy</div>
+        <div>
+          <a href="message.html" class="btn" style="text-decoration: none;">Message</a>
+        </div>
+      </div>
+    </main>
+
+    <div id="hearts-layer"></div>
+    <footer class="footer">Made With❤️ For You</footer>
+  </div>
+          <audio id="bgAudio" loop>
+            <source src="assets/sounds_effect/bg_music.mp3" type="audio/mpeg">
+            <source src="assets/sounds_effect/bg_music.mp3" type="audio/ogg">
+          </audio>
+
+  <script>
+  // 🎵 Background music autoplay — works on mobile tap too
+   const audio = document.getElementById('bgAudio');
+   audio.play();
+
+  // Try autoplay (desktop)
+   audio.play().catch(() => {
+    // If blocked, wait for first user interaction
+    const startMusic = () => {
+      audio.muted = false;
+      audio.play().then(() => {
+        console.log("Music started 🎶");
+      }).catch(err => console.log(err));
+      document.removeEventListener("touchstart", startMusic);
+      document.removeEventListener("click", startMusic);
+    };
+    document.addEventListener("touchstart", startMusic);
+    document.addEventListener("click", startMusic);
+   });
+
+    // ❄️ Snowfall effect (slow + full-screen)
+    function createSnow() {
+      const snow = document.createElement("div");
+      snow.classList.add("snow");
+      snow.innerHTML = "❄️";
+      snow.style.left = Math.random() * 100 + "vw";
+      snow.style.animationDuration = (6 + Math.random() * 5) + "s"; // slower fall
+      snow.style.fontSize = (14 + Math.random() * 20) + "px";
+      document.getElementById("hearts-layer").appendChild(snow);
+      setTimeout(() => snow.remove(), 11000);
+    }
+
+    // Keep snowing forever
+    setInterval(createSnow, 180);
+
+    // 🩷 Question check
+    function checkAnswer() {
+      let answer = document.querySelector('input[name="q2"]:checked');
+      if (!answer) { alert("Please select an answer!"); return; }
+      if (answer.value === "a") { window.location.href = "right.html"; }
+      else { window.location.href = "wrong.html"; }
+    }
+  </script>
+</body>
+</html>

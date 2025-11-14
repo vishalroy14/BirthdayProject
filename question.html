@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Birthday — Message</title>
+  <link rel="stylesheet" href="css/common.css"/>
+
+  <style>
+    /* ❄️ Snowfall slow full-screen fix */
+    #hearts-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      overflow: hidden;
+    }
+
+    .snow {
+      position: absolute;
+      top: -10px;
+      color: #fff;
+      animation: fallSnow linear forwards;
+      opacity: 0.3;
+      filter: drop-shadow(0 0 6px #fff);
+    }
+
+    @keyframes fallSnow {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(110vh) scale(1.2) rotate(720deg); opacity: 0.6; }
+    }
+
+    /* 📱 Responsive big image */
+    .big-image-container {
+      width: 100%;
+      max-height: 60vh;
+      overflow: hidden;
+      border-radius: 16px;
+      margin: 12px 0;
+    }
+
+    .big-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* 💌 Message styling */
+    .msg {
+      color: rgba(90, 90, 90, 0.9);
+      font-style: italic;
+      font-weight: 500;
+      line-height: 1.6;
+      letter-spacing: 0.4px;
+      font-size: clamp(0.95rem, 2vw, 1.2rem);
+      opacity: 0.85;
+      animation: textFlyIn 3.5s ease-out both;
+    }
+
+    /* ✨ Highlighted ending line */
+    .msg strong {
+      display: block;
+      text-align: center;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 700;
+      color: #ff5e99;
+      margin-top: 24px;
+    }
+
+    /* 🌀 Text animation from all directions */
+    @keyframes textFlyIn {
+      0% {
+        opacity: 0;
+        transform: translate(0, 100px) rotate(5deg) scale(0.95);
+      }
+      25% { transform: translate(-50px, 50px) rotate(-3deg); opacity: 0.5; }
+      50% { transform: translate(30px, -40px) rotate(2deg); opacity: 0.8; }
+      100% {
+        opacity: 1;
+        transform: translate(0, 0) rotate(0deg) scale(1);
+      }
+    }
+
+    /* 🌸 Layout fix for single container */
+    .hero {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .hero-title {
+      font-size: clamp(1.5rem, 5vw, 2.5rem);
+      color: #ff4d8d;
+      font-weight: 700;
+    }
+
+    @media (max-width: 480px) {
+      .msg strong { font-size: 2rem; }
+    }
+
+      /* 🎬 Responsive video styling */
+  #accept-video-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 16px 0;
+  }
+
+#accept-video-wrap video {
+    width: 100%;
+    max-width: 320px;      /* Max width for mobile */
+    height: auto;          /* Maintain aspect ratio */
+    border-radius: 16px;   /* Rounded corners */
+    object-fit: cover;     /* Fill nicely */
+    display: block;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3); /* Soft shadow */
+}
+
+  @media (max-width: 480px) {
+    #accept-video-wrap video {
+      max-width: 260px;    /* Smaller width for small phones */
+    }
+  }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header class="topbar">
+      <div class="brand"></div>
+      <div class="page-indicator"></div>
+    </header>
+
+    <main class="page-box">
+      <div class="hero">
+        <div class="hero-left">
+          <h1 class="hero-title">ANSWER ME</h1>
+          <hr><br>
+           <div id="accept-video-wrap" class="accept-video-wrap">
+              <!-- Background video -->
+  <video id="bgVideo" autoplay muted playsinline loop preload="auto">
+    <source src="assets/videos/wrong.mp4" type="video/mp4">
+  </video>
+          <audio id="bgAudio" loop>
+         <source src="assets/sounds_effect/pyar.mp3" type="audio/mpeg">
+         <source src="assets/sounds_effect/pyar.mp3" type="audio/ogg">
+        </audio>
+        </div>
+          <label class="custom-radio">
+            <input type="radio" name="q2" value="a">Hai
+          </label><br>
+          <label class="custom-radio">
+            <input type="radio" name="q2" value="b">Sochenge
+          </label><br>
+          <button onclick="checkAnswer()" class="btn" style="margin-top:16px;">SUBMIT</button>
+        </div>
+      </div>
+         <div class="three-d-container">
+ 
+
+      <div class="nav-row">
+      </div>
+    </main>
+
+    <div id="hearts-layer"></div>
+    <footer class="footer">Made With❤️ For You</footer>
+  </div>
+
+  <audio id="bgmusic" src="assets/sounds_effect/bg_music.mp3" autoplay loop muted></audio>
+
+  <script>
+    // 🎵 Background music autoplay — works on mobile tap too
+    const video = document.getElementById('bgVideo');
+
+        const audio = document.getElementById('bgAudio');
+        audio.play();
+
+    audio.play().catch(() => {
+      const startMusic = () => {
+        audio.muted = false;
+        audio.play().catch(()=>{});
+        document.removeEventListener("touchstart", startMusic);
+        document.removeEventListener("click", startMusic);
+      };
+      document.addEventListener("touchstart", startMusic);
+      document.addEventListener("click", startMusic);
+    });
+    // Try to play video automatically
+video.play().catch(() => {
+  // If autoplay blocked, wait for user interaction
+  const startVideo = () => {
+    video.play().catch(()=>{});
+    document.removeEventListener('touchstart', startVideo);
+    document.removeEventListener('click', startVideo);
+  };
+  document.addEventListener('touchstart', startVideo);
+  document.addEventListener('click', startVideo);
+});
+
+    // ❄️ Snowfall effect (slow + full-screen)
+    function createSnow() {
+      const snow = document.createElement("div");
+      snow.classList.add("snow");
+      snow.innerHTML = "❓";
+      snow.style.left = Math.random() * 100 + "vw";
+      snow.style.animationDuration = (7 + Math.random() * 5) + "s";
+      snow.style.fontSize = (14 + Math.random() * 22) + "px";
+      document.getElementById("hearts-layer").appendChild(snow);
+      setTimeout(() => snow.remove(), 12000);
+    }
+
+    setInterval(createSnow, 200);
+
+        // 🩷 Question check
+    function checkAnswer() {
+      let answer = document.querySelector('input[name="q2"]:checked');
+      if (!answer) { alert("Please select an answer!"); return; }
+      if (answer.value === "a") { window.location.href = "game.html"; }
+      else { window.location.href = "wrong.html"; }
+    }
+  </script>
+</body>
+</html>

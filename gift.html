@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Birthday — Gifts</title>
+  <link rel="stylesheet" href="css/gift.css"/>
+</head>
+<body data-start-hearts="false">
+  <div class="container">
+    <header class="topbar">
+      <div class="brand">🎁</div>
+    </header>
+
+    <main class="page-box">
+      <h2 class="section-title">PROMISES😊</h2><br><hr>
+
+      <div class="gifts-wrap">
+        <div class="gifts-grid" id="gifts-grid">
+          <audio id="bgAudio" loop>
+              <source src="assets/sounds_effect/bg_music.mp3" type="audio/mpeg">
+              <source src="assets/sounds_effect/bg_music.mp3" type="audio/ogg">
+          </audio>
+        </div>
+        <div class="gift-message" id="gift-msg"></div>
+
+        <div class="love-ask" id="love-ask">
+          <div class="msg"style="font-weight:700">Should We Cut The Cake?</div>
+          <div class="accept-row" style="margin-top:8px">
+            <button id="accept-btn" class="btn">YES</button>
+          </div>
+        </div>
+
+        <div id="accept-video-wrap" class="accept-video-wrap">
+          <video id="accept-video" playsinline style="max-width:100%;border-radius:10px">
+            <source src="assets/videos/accept_video.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="cake-area" id="cake-area" style="display:none;align-items:center;gap:18px">
+          <img src="assets/images/cake.png" alt="cake" id="cake" style="width:220px;max-width:60%">
+          <div id="knife" draggable="true" style="font-size:2.4rem;cursor:grab">🔪</div>
+        </div>
+      </div>
+
+      <div class="nav-row">
+        <a href="game.html" class="btn prev"style="text-decoration: none;">Previous</a>
+  
+        <button class="btn next" onclick="finish()">Finish</button>
+      </div>
+    </main>
+
+    <div id="hearts-layer"></div>
+    <div id="balloons-layer"></div>
+
+    <footer class="footer">Made With❤️ For You</footer>
+  </div>
+  <script>
+        function finish() {
+          alert("From The Heart Of Vishal Roy...Once Again Happy Happy Happy Birthday My LOVE❤️!"); return;
+          window.location.href = "index.html"; }
+
+  </script>
+
+  <script src="js/common.js">
+    
+  </script>
+</body>
+</html>
